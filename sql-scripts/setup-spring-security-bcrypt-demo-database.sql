@@ -18,18 +18,16 @@ CREATE TABLE `users` (
 --
 -- Dumping data for table `users`
 --
--- NOTE: The passwords are encrypted using BCrypt
+-- A generation tool is avail at: https://www.bcryptcalculator.com
 --
--- A generation tool is avail at: http://www.luv2code.com/generate-bcrypt-password
---
--- Default passwords here are: fun123
+-- Default passwords here are: password
 --
 
 INSERT INTO `users` 
 VALUES 
-('john','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1),
-('mary','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1),
-('susan','{bcrypt}$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K',1);
+('kostya','{bcrypt}$2a$10$PyIzlZmhqxFNa/Yaoc9fBe8DAoWOLN5er.KyzYG/HAWUribKf.3L6',1),
+('mary','{bcrypt}$2a$10$I47ix5o7r5fDMn8rUBrzYOj3le4vaxNSGiT.8f0xmmSLu2l5Fp86y',1),
+('kiril','{bcrypt}$2a$10$k8jp..76MFwbATXK5h2Wxuugy5IoRKi//qLGTAmQxG5RK/mSNL6.2',1);
 
 
 --
@@ -50,10 +48,10 @@ CREATE TABLE `authorities` (
 
 INSERT INTO `authorities` 
 VALUES 
-('john','ROLE_EMPLOYEE'),
+('kostya','ROLE_EMPLOYEE'),
 ('mary','ROLE_EMPLOYEE'),
 ('mary','ROLE_MANAGER'),
-('susan','ROLE_EMPLOYEE'),
-('susan','ROLE_ADMIN');
+('kiril','ROLE_EMPLOYEE'),
+('kiril','ROLE_ADMIN');
 
 

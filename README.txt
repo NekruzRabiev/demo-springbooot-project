@@ -8,9 +8,9 @@ SQL Scripts
 +---------+----------+-----------------------------+
 | user id | password |            roles            |
 +---------+----------+-----------------------------+
-| john    | fun123   | ROLE_EMPLOYEE               |
-| mary    | fun123   | ROLE_EMPLOYEE, ROLE_MANAGER |
-| susan   | fun123   | ROLE_EMPLOYEE, ROLE_ADMIN   |
+| kostya  | password | ROLE_EMPLOYEE               |
+| mary    | password | ROLE_EMPLOYEE, ROLE_MANAGER |
+| kiril   | password | ROLE_EMPLOYEE, ROLE_ADMIN   |
 +---------+----------+-----------------------------+
 
 CREATE BEANS FOR DATABASE ACCESS
@@ -28,15 +28,15 @@ For the main application, these are the database connection properties
 # JDBC properties
 #
 app.datasource.jdbc-url=jdbc:mysql://localhost:3306/employee_directory?useSSL=false&serverTimezone=UTC
-app.datasource.username=springstudent
-app.datasource.password=springstudent
+app.datasource.username=project
+app.datasource.password=password
 
 
 For the JPA configuration, the file has the following
 
 # Spring Data JPA properties
-spring.data.jpa.repository.packages=com.luv2code.springboot.thymeleafdemo.dao
-spring.data.jpa.entity.packages-to-scan=com.luv2code.springboot.thymeleafdemo.entity
+spring.data.jpa.repository.packages=com.project.dao
+spring.data.jpa.entity.packages-to-scan=com.project.entity
 
 For the Security database, the file has the following
 
@@ -119,7 +119,7 @@ c. Configure EntityManagerFactory
 
 The entity manager factory tells Spring Data JPA which packages to scan for JPA entities. The @ConfigurationProperties will read properties from the config file (application.properties). It will read the properties from the file with the prefix: "spring.data.jpa.entity". So it will read the following:
 
-spring.data.jpa.entity.packages-to-scan=com.luv2code.springboot.thymeleafdemo.entity
+spring.data.jpa.entity.packages-to-scan=com.project.entity
 
 d. Configure Data Source for Security
 
@@ -262,9 +262,9 @@ TEST THE APPLICATION
 +---------+----------+-----------------------------+
 | user id | password |            roles            |
 +---------+----------+-----------------------------+
-| john    | fun123   | ROLE_EMPLOYEE               |
-| mary    | fun123   | ROLE_EMPLOYEE, ROLE_MANAGER |
-| susan   | fun123   | ROLE_EMPLOYEE, ROLE_ADMIN   |
+| kostya  | password | ROLE_EMPLOYEE               |
+| mary    | password | ROLE_EMPLOYEE, ROLE_MANAGER |
+| kiril   | password | ROLE_EMPLOYEE, ROLE_ADMIN   |
 +---------+----------+-----------------------------+
 
 4. Confirm that you can login and access data based on the roles.					
