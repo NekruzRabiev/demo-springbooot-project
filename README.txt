@@ -1,17 +1,8 @@
 SPRING BOOT, SPRING SECURITY AND THYMELEAF
 ==========================================
 
-A student asked for a Spring Security version of the Thymeleaf Employee Directory application. This version makes use of JDBC Authentication with encrypted passwords.
-
-For docs on Spring Security and Thymeleaf integration, see this link
-- https://www.thymeleaf.org/doc/articles/springsecurity.html
-
-
 SQL Scripts
 ===========
-These are the same SQL scripts used in the course.
-- employee.sql: Creates the employee table and loads sample data
-
 - setup-spring-security-bcrypt-demo-database.sql: Creates login accounts with encrypted passwords
 
 +---------+----------+-----------------------------+
@@ -21,28 +12,6 @@ These are the same SQL scripts used in the course.
 | mary    | fun123   | ROLE_EMPLOYEE, ROLE_MANAGER |
 | susan   | fun123   | ROLE_EMPLOYEE, ROLE_ADMIN   |
 +---------+----------+-----------------------------+
-
-
-
-MAVEN PROJECT UPDATES
-=====================
-We need to add entries for Spring Security and Thymeleaf Security
-
-1. Add Spring Security starter
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-
-2. Add the Thymeleaf pom entries for Spring Security
-
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-		</dependency>
-
 
 CREATE BEANS FOR DATABASE ACCESS
 ================================
@@ -75,8 +44,8 @@ For the Security database, the file has the following
 # SECURITY JDBC properties
 #
 security.datasource.jdbc-url=jdbc:mysql://localhost:3306/spring_security_demo_bcrypt?useSSL=false&serverTimezone=UTC
-security.datasource.username=springstudent
-security.datasource.password=springstudent
+security.datasource.username=project
+security.datasource.password=password
 
 
 4. The datasources are configured in the file: DemoDataSourceConfig.java
@@ -114,9 +83,9 @@ a. Configure Spring Data JPA
 
 This tells the app that we are using JPA repositories defined in the given package. The package name is read from the application.properties file.
 
-spring.data.jpa.repository.packages=com.luv2code.springboot.thymeleafdemo.dao
+spring.data.jpa.repository.packages=com.project.dao
 
-In this case, the package name is: com.luv2code.springboot.thymeleafdemo.dao, so Spring Data JPA will scan for JPA repositories in this package. Spring Data JPA makes use of a entity manager factory bean and transacation manager. 
+In this case, the package name is: com.project.dao, so Spring Data JPA will scan for JPA repositories in this package. Spring Data JPA makes use of a entity manager factory bean and transacation manager. 
 By default it will use a bean named, "entityManagerFactory". We manually configure this bean in this class. Also, by default, Spring Data JPA will use a bean named "transactionManager". The "transactionManager" bean is autoconfigured by Spring Boot.
 
 b. Configure application DataSource
@@ -135,8 +104,8 @@ This code creates a datasource. This datasource is for our main application data
 The @ConfigurationProperties will read properties from the config file (application.properties). It will read the properties from the file with the prefix: "app.datasource". So it will read the following:
 
 app.datasource.jdbc-url=jdbc:mysql://localhost:3306/employee_directory?useSSL=false&serverTimezone=UTC
-app.datasource.username=springstudent
-app.datasource.password=springstudent
+app.datasource.username=project
+app.datasource.password=password
 
 c. Configure EntityManagerFactory
 
@@ -165,8 +134,8 @@ Here we configure the datasource to access the security database. By default, Sp
 The @ConfigurationProperties will read properties from the config file (application.properties). It will read the properties from the file with the prefix: "security.datasource". So it will read the following:
 
 security.datasource.jdbc-url=jdbc:mysql://localhost:3306/spring_security_demo_bcrypt?useSSL=false&serverTimezone=UTC
-security.datasource.username=springstudent
-security.datasource.password=springstudent
+security.datasource.username=project
+security.datasource.password=password
 
 
 CONFIGURE SPRING SECURITY FOR DATABASE AUTHENTICATION
@@ -190,10 +159,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		// use jdbc authentication ... oh yeah!!!		
 		auth.jdbcAuthentication().dataSource(securityDataSource);
-		
 	}
 
 	...
@@ -287,7 +253,7 @@ TEST THE APPLICATION
 ====================
 0. Before running the application, make sure the database tables are set up (via SQL files).  Also, be sure to update application.properties for database connection (url, userid, pass)
  
-1. Run the Spring Boot application: ThymeleafdemoApplication.java
+1. Run the Spring Boot application: DemoApplication.java
 
 2. Open a web browser for the app: http://localhost:8080
 
@@ -301,7 +267,4 @@ TEST THE APPLICATION
 | susan   | fun123   | ROLE_EMPLOYEE, ROLE_ADMIN   |
 +---------+----------+-----------------------------+
 
-4. Confirm that you can login and access data based on the roles.
-
-Congratulations! You have an app that uses Spring Boot, Spring Security (JDBC), Thymeleaf, Spring Data JPA
- 					
+4. Confirm that you can login and access data based on the roles.					
