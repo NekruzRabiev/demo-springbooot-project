@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.project</groupId>
-	<artifactId>thymeleafdemo-employees-crud-security-with-jdbc-authentication</artifactId>
+	<artifactId>demo-springboot-project</artifactId>
 	<version>1.0.0</version>
 
 	<properties>
